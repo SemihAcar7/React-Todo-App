@@ -1,11 +1,34 @@
 import React from 'react'
-import { useState,useRef } from 'react'
+import { useState,useRef,useEffect } from 'react'
 import Tasks from './Tasks'
 
 function Inputs() {
     const [todo,setTodo] = useState({})
     const [list,setList] = useState([])
     const inputRef = useRef()
+
+    useEffect(() => {
+        let todos = JSON.parse(localStorage.getItem("array"))
+        if(!todos){
+            localStorage.setItem("array",JSON.stringify([]))
+        }else{
+            setList(todos)
+        }
+    },[])
+
+    useEffect(() => {
+        let todos = JSON.parse(localStorage.getItem("array"))
+        if(!todos){
+           todos =  localStorage.setItem("array",[])
+        }else{
+            let str = JSON.stringify(list)
+            todos = localStorage.setItem("array",str)
+        }
+    },[list])
+
+
+
+
 
     function pushList(){
         setList(prevList => [...prevList,todo])

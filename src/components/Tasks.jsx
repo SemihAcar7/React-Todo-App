@@ -9,6 +9,17 @@ function Tasks({list,setList}) {
         setList(newList)
     }
 
+    function checkItem(index){
+        let newList = [...list]
+        if(newList[index].isCompleted){
+            newList[index].isCompleted = false
+        }else{
+            newList[index].isCompleted = true
+        }
+        setList(newList)
+        }
+        
+
 
 
     let ffalse = "flex justify-between p-4 items-center rounded bg-transparent"
@@ -20,7 +31,7 @@ function Tasks({list,setList}) {
                 <li key={index} className={item.isCompleted ? ttrue :ffalse}>
                     <span className='text-3xl'>{item.text}</span>
                     <div className='flex gap-3'>
-                        <FaRegThumbsUp size = {35} className={"cursor-pointer hover:text-green-500"}/>
+                        <FaRegThumbsUp size = {35} className={"cursor-pointer hover:text-green-500"} onClick={() => checkItem(index)}/>
                         <FaRegTrashAlt size = {35} className={"cursor-pointer hover:text-red-500"} onClick={() => deleteItem(index) }/>
                     </div>
 
